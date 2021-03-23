@@ -118,3 +118,47 @@ const icons = [
     category: "animal"
   },
 ];
+
+const iconsContain = $('.icons');
+
+// coloriamo le icone per tipo
+const colors = [
+  'lightblue',
+  'coral',
+  'grey'
+];
+
+// array delle categorie obj
+const categories = [];
+
+  icons.forEach((item, i) => {
+    if(categories.includes(item.category) == false) {
+      categories.push(item.category);
+    }
+});
+
+// mappo gli item per assegnargli le categorie coi colori
+const colorIcons = icons.map((icon) =>{
+  let categoryIndex = categories.indexOf(icon.category);
+  let colorItem = colors[categoryIndex];
+
+  // aggiungo la proprieta color
+  icon.color = colorItem;
+
+  // icon deve sempre ritornare
+  return icon;
+});
+console.log(colorIcons);
+
+// Mostro le icone disponibili nel layout
+colorIcons.forEach((icon) => {
+
+  const {name, prefix, family, color} = icon;
+
+  const html = `<div>
+  <i class="${family} ${prefix}${name}" style="color:${color}"></i>
+  <div class="title">${name}</div>
+  </div>`;
+
+  iconsContain.append(html);
+});
